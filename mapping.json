@@ -1,0 +1,288 @@
+{
+  "rules": [
+    {
+      "folder": "",
+      "component": "AccountCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "accountSharingRules",
+      "component": "AccountOwnerSharingRule"
+    },
+    {
+      "folder": "analyticSnapshots",
+      "component": "AnalyticSnapshot"
+    },
+    {
+      "folder": "classes",
+      "component": "ApexClass"
+    },
+    {
+      "folder": "components",
+      "component": "ApexComponent"
+    },
+    {
+      "folder": "pages",
+      "component": "ApexPage"
+    },
+    {
+      "folder": "triggers",
+      "component": "ApexTrigger"
+    },
+    {
+      "folder": "appMenus",
+      "component": "AppMenu"
+    },
+    {
+      "folder": "approvalProcesses",
+      "component": "ApprovalProcess"
+    },
+    {
+      "folder": "assignmentRules",
+      "component": "AssignmentRule"
+    },
+    {
+      "folder": "authproviders",
+      "component": "AuthProvider"
+    },
+    {
+      "folder": "callCenters",
+      "component": "CallCenter"
+    },
+    {
+      "folder": "",
+      "component": "CampaignCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "campaignSharingRules",
+      "component": "CampaignOwnerSharingRule"
+    },
+    {
+      "folder": "",
+      "component": "CaseCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "caseSharingRules",
+      "component": "CaseOwnerSharingRule"
+    },
+    {
+      "folder": "communities",
+      "component": "Community"
+    },
+    {
+      "folder": "connectedapps",
+      "component": "ConnectedApp"
+    },
+    {
+      "folder": "",
+      "component": "ContactCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "contactSharingRules",
+      "component": "ContactOwnerSharingRule"
+    },
+    {
+      "folder": "applications",
+      "component": "CustomApplication"
+    },
+    {
+      "folder": "customApplicationComponents",
+      "component": "CustomApplicationComponent"
+    },
+    {
+      "folder": "labels",
+      "component": "CustomLabels"
+    },
+    {
+      "folder": "customMetadata",
+      "component": "CustomMetadata"
+    },
+    {
+      "folder": "objects",
+      "component": "CustomObject"
+    },
+    {
+      "folder": "customObjectSharingRules",
+      "component": "CustomObjectCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "objectTranslations",
+      "component": "CustomObjectTranslation"
+    },
+    {
+      "folder": "weblinks",
+      "component": "CustomPageWebLink"
+    },
+    {
+      "folder": "customPermissions",
+      "component": "CustomPermission"
+    },
+    {
+      "folder": "sites",
+      "component": "CustomSite"
+    },
+    {
+      "folder": "tabs",
+      "component": "CustomTab"
+    },
+    {
+      "folder": "dashboards",
+      "component": "Dashboard"
+    },
+    {
+      "folder": "datacategorygroups",
+      "component": "DataCategoryGroup"
+    },
+    {
+      "folder": "documents",
+      "component": "Document"
+    },
+    {
+      "folder": "email",
+      "component": "EmailTemplate"
+    },
+    {
+      "folder": "escalationRules",
+      "component": "EscalationRule"
+    },
+    {
+      "folder": "flexipages",
+      "component": "FlexiPage"
+    },
+    {
+      "folder": "flows",
+      "component": "Flow"
+    },
+    {
+      "folder": "groups",
+      "component": "Group"
+    },
+    {
+      "folder": "homepagecomponents",
+      "component": "HomePageComponent"
+    },
+    {
+      "folder": "homePageLayouts",
+      "component": "HomePageLayout"
+    },
+    {
+      "folder": "layouts",
+      "component": "Layout"
+    },
+    {
+      "folder": "",
+      "component": "LeadCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "leadSharingRules",
+      "component": "LeadOwnerSharingRule"
+    },
+    {
+      "folder": "letterhead",
+      "component": "Letterhead"
+    },
+    {
+      "folder": "liveChatAgentConfigs",
+      "component": "LiveChatAgentConfig"
+    },
+    {
+      "folder": "liveChatButtons",
+      "component": "LiveChatButton"
+    },
+    {
+      "folder": "liveChatDeployments",
+      "component": "LiveChatDeployment"
+    },
+    {
+      "folder": "networks",
+      "component": "Network"
+    },
+    {
+      "folder": "",
+      "component": "OpportunityCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "opportunitySharingRules",
+      "component": "OpportunityOwnerSharingRule"
+    },
+    {
+      "folder": "permissionsets",
+      "component": "PermissionSet"
+    },
+    {
+      "folder": "postTemplates",
+      "component": "PostTemplate"
+    },
+    {
+      "folder": "profiles",
+      "component": "Profile"
+    },
+    {
+      "folder": "queues",
+      "component": "Queue"
+    },
+    {
+      "folder": "quickActions",
+      "component": "QuickAction"
+    },
+    {
+      "folder": "remoteSiteSettings",
+      "component": "RemoteSiteSetting"
+    },
+    {
+      "folder": "reports",
+      "component": "Report"
+    },
+    {
+      "folder": "reportTypes",
+      "component": "ReportType"
+    },
+    {
+      "folder": "roles",
+      "component": "Role"
+    },
+    {
+      "folder": "samlssoconfigs",
+      "component": "SamlSsoConfig"
+    },
+    {
+      "folder": "scontrols",
+      "component": "Scontrol"
+    },
+    {
+      "folder": "sharingSets",
+      "component": "SharingSet"
+    },
+    {
+      "folder": "siteDotComSites",
+      "component": "SiteDotCom"
+    },
+    {
+      "folder": "skills",
+      "component": "Skill"
+    },
+    {
+      "folder": "staticresources",
+      "component": "StaticResource"
+    },
+    {
+      "folder": "translations",
+      "component": "Translations"
+    },
+    {
+      "folder": "",
+      "component": "UserCriteriaBasedSharingRule"
+    },
+    {
+      "folder": "userSharingRules",
+      "component": "UserMembershipSharingRule"
+    },
+    {
+      "folder": "workflows",
+      "component": "Workflow"
+    },
+    {
+      "folder": "settings",
+      "component": "Settings"
+    }
+  ]
+}
