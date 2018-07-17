@@ -73,8 +73,11 @@ public class FileMover {
         String targetFileName = this.targetFolder.getAbsolutePath() + "/" + fileName;
 
         try (InputStream inputStream = new FileInputStream(sourceFileName); OutputStream outputStream = new FileOutputStream(targetFileName)) {
-            byte[] bytes = inputStream.readAllBytes();
-            outputStream.write(bytes, 0, bytes.length);
+        	byte currentByte = 0;
+        	while (currentByte > -1){
+        		currentByte = (byte) inputStream.read();
+        		outputStream.write(currentByte);
+        	}        	
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", sourceFileName, targetFileName));
         }
@@ -122,8 +125,11 @@ public class FileMover {
         String targetFileName = folderToCopy.getPath() + "/" + fileToCopy.getName();
 
         try (InputStream inputStream = new FileInputStream(fileToCopy.getPath()); OutputStream outputStream = new FileOutputStream(targetFileName)) {
-            byte[] bytes = inputStream.readAllBytes();
-            outputStream.write(bytes, 0, bytes.length);
+        	byte currentByte = 0;
+        	while (currentByte > -1){
+        		currentByte = (byte) inputStream.read();
+        		outputStream.write(currentByte);
+        	}         	
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", fileToCopy, folderToCopy.getPath()));
         }

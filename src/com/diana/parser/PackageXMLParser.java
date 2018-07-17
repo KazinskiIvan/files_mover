@@ -81,12 +81,35 @@ public class PackageXMLParser implements XMLParser {
         File jsonFile = new File(this.PATH_TO_CONFIG_JSON);
         String jsonSTR = "";
 
+        InputStream reader= null;
+        try {
         if (jsonFile.exists()) {
-            InputStream reader = new FileInputStream(this.PATH_TO_CONFIG_JSON);
-            jsonSTR = new String(reader.readAllBytes());
+	            reader = new FileInputStream(this.PATH_TO_CONFIG_JSON);
         } else {
-            InputStream inpStr = PackageXMLParser.class.getResourceAsStream("/" + this.PATH_TO_CONFIG_JSON);
-            jsonSTR = new String(inpStr.readAllBytes());
+	            reader = PackageXMLParser.class.getResourceAsStream("/" + this.PATH_TO_CONFIG_JSON);
+	        }
+        
+	        ArrayList<Byte> bytes = new ArrayList<>();
+	        boolean eof = false;
+	        while (!eof) {
+	        	int intVal = reader.read();
+	        	if (intVal > -1) {
+	        		bytes.add((byte)intVal);
+	        	} else {
+	        		eof = true;
+	        	}
+	        }
+	        
+	        byte [] byteArray = new byte[bytes.size()];
+	        for (int i = 0; i < bytes.size(); i++){
+	        	byteArray[i] = bytes.get(i);
+	        }
+	        
+	        jsonSTR = new String (byteArray);
+        } catch (IOException e){
+        	System.out.println(e.getMessage());
+        } finally {
+        	reader.close();
         }
 
         JSONParser parser = new JSONParser();
