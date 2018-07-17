@@ -1,13 +1,11 @@
 package com.diana.parser;
 
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileMover {
-
     private File targetFolder;
     private File sourceFolder;
     private XMLParser parser;
@@ -39,7 +37,6 @@ public class FileMover {
             if (!sourceFile.isDirectory()) {
                 continue;
             }
-
             copyFiles(sourceFile.listFiles(), sourceFile.getName());
         }
 
@@ -83,7 +80,6 @@ public class FileMover {
         }
 
         System.out.println(String.format("File created: %s.", targetFileName));
-
     }
 
     private void createFolder(String newFolderPath) {
@@ -106,7 +102,6 @@ public class FileMover {
     }
 
     private void copyFiles(File[] sourceFiles, String targetFolderName) throws IOException {
-
         for (File fileFrom : sourceFiles) {
             if (fileFrom.isDirectory()) {
                 String newFolderName = fileFrom.getParentFile().getName() + "/" + fileFrom.getName();
@@ -134,6 +129,5 @@ public class FileMover {
         }
 
         System.out.println(String.format("File created: %s.", targetFileName));
-
     }
 }
