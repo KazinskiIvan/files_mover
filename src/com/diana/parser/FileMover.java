@@ -73,10 +73,14 @@ public class FileMover {
         String targetFileName = this.targetFolder.getAbsolutePath() + "/" + fileName;
 
         try (InputStream inputStream = new FileInputStream(sourceFileName); OutputStream outputStream = new FileOutputStream(targetFileName)) {
-        	byte currentByte = 0;
-        	while (currentByte > -1){
-        		currentByte = (byte) inputStream.read();
+        	boolean eof = false;
+        	while (!eof){
+        		byte currentByte = (byte) inputStream.read();
+        		if( currentByte != -1) {
         		outputStream.write(currentByte);
+        		} else {
+        			eof = true;
+        		}
         	}        	
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", sourceFileName, targetFileName));
