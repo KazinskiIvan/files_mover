@@ -72,12 +72,17 @@ public class FileMover {
         String sourceFileName = this.sourceFolder.getAbsolutePath() + "/" + fileName;
         String targetFileName = this.targetFolder.getAbsolutePath() + "/" + fileName;
 
-        try (InputStream inputStream = new FileInputStream(sourceFileName); OutputStream outputStream = new FileOutputStream(targetFileName)) {
+        try (
+        		InputStream inputStream = new FileInputStream(sourceFileName);
+        		OutputStream outputStream = new FileOutputStream(targetFileName);
+        		BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream)
+		) {
         	boolean eof = false;
         	while (!eof){
-        		byte currentByte = (byte) inputStream.read();
+        		byte currentByte = (byte) bufferedInputStream.read();
         		if( currentByte != -1) {
-        		outputStream.write(currentByte);
+        			bufferedOutputStream.write(currentByte);
         		} else {
         			eof = true;
         		}
@@ -128,11 +133,20 @@ public class FileMover {
     private void copyFile(File fileToCopy, File folderToCopy) throws IOException {
         String targetFileName = folderToCopy.getPath() + "/" + fileToCopy.getName();
 
-        try (InputStream inputStream = new FileInputStream(fileToCopy.getPath()); OutputStream outputStream = new FileOutputStream(targetFileName)) {
-        	byte currentByte = 0;
-        	while (currentByte > -1){
-        		currentByte = (byte) inputStream.read();
-        		outputStream.write(currentByte);
+        try (
+        		InputStream inputStream = new FileInputStream(fileToCopy.getPath()); 
+        		OutputStream outputStream = new FileOutputStream(targetFileName);
+        		BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream)        		
+		) {
+        	boolean eof = false;
+        	while (!eof){
+        		byte currentByte = (byte) bufferedInputStream.read();
+        		if (currentByte != -1) {
+        			bufferedOutputStream.write(currentByte);
+        		} else {
+        			eof = true;
+        		}
         	}         	
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", fileToCopy, folderToCopy.getPath()));
