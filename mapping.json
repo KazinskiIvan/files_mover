@@ -1,12 +1,8 @@
 {
   "rules": [
     {
-      "folder": "",
-      "component": "AccountCriteriaBasedSharingRule"
-    },
-    {
-      "folder": "accountSharingRules",
-      "component": "AccountOwnerSharingRule"
+      "folder": "actionLinkGroupTemplates",
+      "component": "ActionLinkGroupTemplate"
     },
     {
       "folder": "analyticSnapshots",
@@ -25,6 +21,10 @@
       "component": "ApexPage"
     },
     {
+      "folder": "testSuites",
+      "component": "ApexTestSuite"
+    },
+    {
       "folder": "triggers",
       "component": "ApexTrigger"
     },
@@ -38,47 +38,75 @@
     },
     {
       "folder": "assignmentRules",
-      "component": "AssignmentRule"
+      "component": "AssignmentRules"
+    },
+    {
+      "folder": "aura",
+      "component": "AuraDefinitionBundle"
     },
     {
       "folder": "authproviders",
       "component": "AuthProvider"
     },
     {
+      "folder": "autoResponseRules",
+      "component": "AutoResponseRules"
+    },
+    {
+      "folder": "brandingSets",
+      "component": "BrandingSet"
+    },
+    {
       "folder": "callCenters",
       "component": "CallCenter"
     },
     {
-      "folder": "",
-      "component": "CampaignCriteriaBasedSharingRule"
+      "folder": "CaseSubjectParticles",
+      "component": "CaseSubjectParticle"
     },
     {
-      "folder": "campaignSharingRules",
-      "component": "CampaignOwnerSharingRule"
+      "folder": "certs",
+      "component": "Certificate"
     },
     {
-      "folder": "",
-      "component": "CaseCriteriaBasedSharingRule"
+      "folder": "channelLayouts",
+      "component": "ChannelLayout"
     },
     {
-      "folder": "caseSharingRules",
-      "component": "CaseOwnerSharingRule"
+      "folder": "ChatterExtensions",
+      "component": "ChatterExtension"
+    },
+    {
+      "folder": "cleanDataServices",
+      "component": "CleanDataService"
     },
     {
       "folder": "communities",
       "component": "Community"
     },
     {
-      "folder": "connectedapps",
+      "folder": "communityTemplateDefinitions",
+      "component": "CommunityTemplateDefinition"
+    },
+    {
+      "folder": "communityThemeDefinitions",
+      "component": "CommunityThemeDefinition"
+    },
+    {
+      "folder": "connectedApps",
       "component": "ConnectedApp"
     },
     {
-      "folder": "",
-      "component": "ContactCriteriaBasedSharingRule"
+      "folder": "contentassets",
+      "component": "ContentAsset"
     },
     {
-      "folder": "contactSharingRules",
-      "component": "ContactOwnerSharingRule"
+      "folder": "corsWhitelistOrigins",
+      "component": "CorsWhitelistOrigin"
+    },
+    {
+      "folder": "cspTrustedSites",
+      "component": "CspTrustedSite"
     },
     {
       "folder": "applications",
@@ -87,6 +115,10 @@
     {
       "folder": "customApplicationComponents",
       "component": "CustomApplicationComponent"
+    },
+    {
+      "folder": "feedFilters",
+      "component": "CustomFeedFilter"
     },
     {
       "folder": "labels",
@@ -99,10 +131,6 @@
     {
       "folder": "objects",
       "component": "CustomObject"
-    },
-    {
-      "folder": "customObjectSharingRules",
-      "component": "CustomObjectCriteriaBasedSharingRule"
     },
     {
       "folder": "objectTranslations",
@@ -133,16 +161,56 @@
       "component": "DataCategoryGroup"
     },
     {
+      "folder": "delegateGroups",
+      "component": "DelegateGroup"
+    },
+    {
       "folder": "documents",
       "component": "Document"
+    },
+    {
+      "folder": "duplicateRules",
+      "component": "DuplicateRule"
+    },
+    {
+      "folder": "eclair",
+      "component": "EclairGeoData"
     },
     {
       "folder": "email",
       "component": "EmailTemplate"
     },
     {
+      "folder": "EmbeddedServiceBranding",
+      "component": "EmbeddedServiceBranding"
+    },
+    {
+      "folder": "EmbeddedServiceConfig",
+      "component": "EmbeddedServiceConfig"
+    },
+    {
+      "folder": "EmbeddedServiceLiveAgent",
+      "component": "EmbeddedServiceLiveAgent"
+    },
+    {
       "folder": "escalationRules",
-      "component": "EscalationRule"
+      "component": "EscalationRules"
+    },
+    {
+      "folder": "eventDeliveries",
+      "component": "EventDelivery"
+    },
+    {
+      "folder": "eventSubscriptions",
+      "component": "EventSubscription"
+    },
+    {
+      "folder": "dataSources",
+      "component": "ExternalDataSource"
+    },
+    {
+      "folder": "externalServiceRegistrations",
+      "component": "ExternalServiceRegistration"
     },
     {
       "folder": "flexipages",
@@ -153,11 +221,23 @@
       "component": "Flow"
     },
     {
+      "folder": "flowDefinitions",
+      "component": "FlowDefinition"
+    },
+    {
+      "folder": "globalValueSets",
+      "component": "GlobalValueSet"
+    },
+    {
+      "folder": "globalValueSetTranslations",
+      "component": "GlobalValueSetTranslation"
+    },
+    {
       "folder": "groups",
       "component": "Group"
     },
     {
-      "folder": "homepagecomponents",
+      "folder": "homePageComponents",
       "component": "HomePageComponent"
     },
     {
@@ -165,16 +245,20 @@
       "component": "HomePageLayout"
     },
     {
+      "folder": "installedPackages",
+      "component": "InstalledPackage"
+    },
+    {
+      "folder": "moderation",
+      "component": "KeywordList"
+    },
+    {
       "folder": "layouts",
       "component": "Layout"
     },
     {
-      "folder": "",
-      "component": "LeadCriteriaBasedSharingRule"
-    },
-    {
-      "folder": "leadSharingRules",
-      "component": "LeadOwnerSharingRule"
+      "folder": "LeadConvertSettings",
+      "component": "LeadConvertSettings"
     },
     {
       "folder": "letterhead",
@@ -193,20 +277,44 @@
       "component": "LiveChatDeployment"
     },
     {
+      "folder": "liveChatSensitiveDataRule",
+      "component": "LiveChatSensitiveDataRule"
+    },
+    {
+      "folder": "managedTopics",
+      "component": "ManagedTopics"
+    },
+    {
+      "folder": "matchingRules",
+      "component": "MatchingRules"
+    },
+    {
+      "folder": "moderation",
+      "component": "ModerationRule"
+    },
+    {
+      "folder": "namedCredentials",
+      "component": "NamedCredential"
+    },
+    {
       "folder": "networks",
       "component": "Network"
     },
     {
-      "folder": "",
-      "component": "OpportunityCriteriaBasedSharingRule"
+      "folder": "networkBranding",
+      "component": "NetworkBranding"
     },
     {
-      "folder": "opportunitySharingRules",
-      "component": "OpportunityOwnerSharingRule"
+      "folder": "pathAssistants",
+      "component": "PathAssistant"
     },
     {
       "folder": "permissionsets",
       "component": "PermissionSet"
+    },
+    {
+      "folder": "cachePartitions",
+      "component": "PlatformCachePartition"
     },
     {
       "folder": "postTemplates",
@@ -215,6 +323,14 @@
     {
       "folder": "profiles",
       "component": "Profile"
+    },
+    {
+      "folder": "profilePasswordPolicies",
+      "component": "ProfilePasswordPolicy"
+    },
+    {
+      "folder": "profileSessionSettings",
+      "component": "ProfileSessionSetting"
     },
     {
       "folder": "queues",
@@ -249,6 +365,14 @@
       "component": "Scontrol"
     },
     {
+      "folder": "settings",
+      "component": "Settings"
+    },
+    {
+      "folder": "sharingRules",
+      "component": "SharingRules"
+    },
+    {
       "folder": "sharingSets",
       "component": "SharingSet"
     },
@@ -261,28 +385,40 @@
       "component": "Skill"
     },
     {
+      "folder": "standardValueSets",
+      "component": "StandardValueSet"
+    },
+    {
+      "folder": "standardValueSetTranslations",
+      "component": "StandardValueSetTranslation"
+    },
+    {
       "folder": "staticresources",
       "component": "StaticResource"
+    },
+    {
+      "folder": "synonymDictionaries",
+      "component": "SynonymDictionary"
+    },
+    {
+      "folder": "topicsForObjects",
+      "component": "TopicsForObjects"
+    },
+    {
+      "folder": "transactionSecurityPolicies",
+      "component": "TransactionSecurityPolicy"
     },
     {
       "folder": "translations",
       "component": "Translations"
     },
     {
-      "folder": "",
-      "component": "UserCriteriaBasedSharingRule"
-    },
-    {
-      "folder": "userSharingRules",
-      "component": "UserMembershipSharingRule"
+      "folder": "userCriteria",
+      "component": "UserCriteria"
     },
     {
       "folder": "workflows",
       "component": "Workflow"
-    },
-    {
-      "folder": "settings",
-      "component": "Settings"
     }
   ]
 }
