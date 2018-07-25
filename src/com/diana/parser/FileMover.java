@@ -9,11 +9,13 @@ public class FileMover {
     private File targetFolder;
     private File sourceFolder;
     private XMLParser parser;
+    private File customLabelsFile;
     private ArrayList<String> filesPath;
 
-    public FileMover(String sourceFolderPath, String targetFolderPath, XMLParser parser) throws Exception {
+    public FileMover(String sourceFolderPath, String targetFolderPath, String customLabelsFilePath, XMLParser parser) throws Exception {
         this.sourceFolder = new File(sourceFolderPath);
         this.targetFolder = new File(targetFolderPath);
+        this.customLabelsFile = new File(customLabelsFilePath);
         if (!this.sourceFolder.exists()) {
             throw new Exception(String.format("Folder %s doesn't exist.", this.sourceFolder.getAbsolutePath()));
         }
@@ -30,7 +32,7 @@ public class FileMover {
             return;
         }
 
-        System.out.println("Started copying ...\n");
+        System.out.println("\nStarted copying ...");
         cleanFolder(this.targetFolder);
 
         for (File sourceFile : this.sourceFolder.listFiles()) {
@@ -40,9 +42,23 @@ public class FileMover {
             copyFiles(sourceFile.listFiles(), sourceFile.getName());
         }
 
-        copyFile(parser.getXMLFIle(), this.targetFolder);
+        copyFile(parser.getXMLFIle(), this.targetFolder );
+        copyCustomLablesFile();
 
         System.out.println("Completed copying ...\n");
+    }
+    
+    private void copyCustomLablesFile(){
+    	try {
+	        String labelsFolderPath = this.targetFolder.getPath() + "\\" +  "labels";
+	        File labelsFolder = new File(labelsFolderPath);
+	        if (!labelsFolder.exists()){
+	        	createFolder(labelsFolderPath);
+	        }
+	        copyFile(this.customLabelsFile, labelsFolder);
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    	}
     }
 
     @Override
@@ -63,9 +79,8 @@ public class FileMover {
                 cleanFolder(file);
             }
             file.delete();
-            System.out.println(String.format("%s is deleted.", file.getAbsolutePath()));
+            //System.out.println(String.format("%s is deleted.", file.getAbsolutePath()));
         }
-
     }
 
     private void copyFile(String fileName) throws IOException {
@@ -89,9 +104,11 @@ public class FileMover {
         	}        	
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", sourceFileName, targetFileName));
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
         }
 
-        System.out.println(String.format("File created: %s.", targetFileName));
+       // System.out.println(String.format("File created: %s.", targetFileName));
     }
 
     private void createFolder(String newFolderPath) {

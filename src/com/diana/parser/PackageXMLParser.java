@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class PackageXMLParser implements XMLParser {
-
     private File configFile;
     private final static String PATH_TO_CONFIG_JSON = "mapping.json";
     private HashMap<String, String> foldersMap;
@@ -78,15 +77,15 @@ public class PackageXMLParser implements XMLParser {
 
     private void loadFolderMapFromJSON() throws Exception {
 
-        File jsonFile = new File(this.PATH_TO_CONFIG_JSON);
+        File jsonFile = new File(PackageXMLParser.PATH_TO_CONFIG_JSON);
         String jsonSTR = "";
 
         InputStream reader= null;
         try {
-        if (jsonFile.exists()) {
-	            reader = new FileInputStream(this.PATH_TO_CONFIG_JSON);
-        } else {
-	            reader = PackageXMLParser.class.getResourceAsStream("/" + this.PATH_TO_CONFIG_JSON);
+	        if (jsonFile.exists()) {
+	            reader = new FileInputStream(PackageXMLParser.PATH_TO_CONFIG_JSON);
+	        } else {
+	            reader = PackageXMLParser.class.getResourceAsStream("/" + PackageXMLParser.PATH_TO_CONFIG_JSON);
 	        }
         
 	        ArrayList<Byte> bytes = new ArrayList<>();
