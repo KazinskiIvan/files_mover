@@ -61,24 +61,23 @@ public class FileMover {
     
     private void copyCustomLablesFile(){
     	try {
-    		ArrayList<String> labels = new ArrayList<String>();
-    		for (String filePath : this.filesPath) {
-    			if (filePath.startsWith("CustomLabel/")) {
-    				labels.add(filePath.split("/")[1]);
-    			}
-    		}
-    		System.out.println(">>> labels = " + labels);
-    		if (labels.size() == 0) {
-    			return;
-    		}
-    		
-	        String labelsFolderPath = this.targetFolder.getPath() + "\\" +  "labels";
-	        File labelsFolder = new File(labelsFolderPath);
-	        if (!labelsFolder.exists()){
-	        	createFolder(labelsFolderPath);
-	        }
+            ArrayList<String> labels = new ArrayList<String>();
+            for (String filePath : this.filesPath) {
+                if (filePath.startsWith("CustomLabel/")) {
+                    labels.add(filePath.split("/")[1]);
+                }
+            }
+            if (labels.size() == 0) {
+                return;
+            }
+
+            String labelsFolderPath = this.targetFolder.getPath() + "\\" +  "labels";
+            File labelsFolder = new File(labelsFolderPath);
+            if (!labelsFolder.exists()){
+                createFolder(labelsFolderPath);
+            }
 	        
-	        //--- start copy labels ---
+            //--- start copy labels ---
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document docLabels = dBuilder.parse(this.customLabelsFile);
@@ -109,9 +108,9 @@ public class FileMover {
             transformer.transform(sourceDoc, resultDoc);
             //--- end copy labels ---
 
-	        //copyFile(this.customLabelsFile, labelsFolder);
+            //copyFile(this.customLabelsFile, labelsFolder);
     	} catch (Exception e) {
-    		System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
     	}
     }
     
