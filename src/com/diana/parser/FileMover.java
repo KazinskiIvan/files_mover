@@ -1,7 +1,18 @@
 package com.diana.parser;
 
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -50,15 +61,78 @@ public class FileMover {
     
     private void copyCustomLablesFile(){
     	try {
-	        String labelsFolderPath = this.targetFolder.getPath() + "\\" +  "labels";
-	        File labelsFolder = new File(labelsFolderPath);
-	        if (!labelsFolder.exists()){
-	        	createFolder(labelsFolderPath);
-	        }
-	        copyFile(this.customLabelsFile, labelsFolder);
+            ArrayList<String> labels = new ArrayList<String>();
+            for (String filePath : this.filesPath) {
+                if (filePath.startsWith("CustomLabel/")) {
+                    labels.add(filePath.split("/")[1]);
+                }
+            }
+            if (labels.size() == 0) {
+                return;
+            }
+
+            String labelsFolderPath = this.targetFolder.getPath() + "\\" +  "labels";
+            File labelsFolder = new File(labelsFolderPath);
+            if (!labelsFolder.exists()){
+                createFolder(labelsFolderPath);
+            }
+	        
+            //--- start copy labels ---
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document docLabels = dBuilder.parse(this.customLabelsFile);
+            docLabels.getDocumentElement().normalize();
+
+            NodeList labelsList = docLabels.getElementsByTagName("labels");
+            int countOfLabels = labelsList.getLength();
+
+            Document newDocLabels = dBuilder.newDocument();
+            Node rootElement = newDocLabels.importNode((Element)docLabels.getElementsByTagName("CustomLabels").item(0), false);
+            newDocLabels.appendChild(rootElement);
+
+            for (int i = 0; i < countOfLabels; i++) {
+                Node label = labelsList.item(i);
+                if (label.getNodeType() == Node.ELEMENT_NODE) {
+                    boolean isLabelFromTheList = checkLabel(labels, getValue("fullName", (Element)label));
+                    if (isLabelFromTheList) {
+                        //System.out.println(">>> " + getValue("fullName", (Element)label));
+                        rootElement.appendChild(newDocLabels.importNode((Element)label, true));
+                    }
+                }
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource sourceDoc = new DOMSource(newDocLabels);
+            StreamResult resultDoc = new StreamResult(new File(labelsFolderPath + "\\CustomLabels.labels"));
+            transformer.transform(sourceDoc, resultDoc);
+            //--- end copy labels ---
+
+            //copyFile(this.customLabelsFile, labelsFolder);
     	} catch (Exception e) {
-    		System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
     	}
+    }
+    
+    private static String getValue(String tag, Element element, int elementIndex) {
+        NodeList nodes = element.getElementsByTagName(tag).item(elementIndex).getChildNodes();
+        Node node = (Node) nodes.item(0);
+        return node.getNodeValue();
+    }
+
+    private static String getValue(String tag, Element element) {
+        return getValue(tag, element, 0);
+    }
+    
+    private static boolean checkLabel(ArrayList<String> labels, String labelToCheck) {
+        boolean result = false;
+        for (String label : labels) {
+            if (label.equals(labelToCheck)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
