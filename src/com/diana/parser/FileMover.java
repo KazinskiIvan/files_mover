@@ -173,6 +173,11 @@ public class FileMover {
         if (pathToTargetFile.contains(".")) {
             pathToTargetFile = pathToTargetFile.substring(0, pathToTargetFile.lastIndexOf("."));
         }
+        // QuickFixForAura
+        if (pathToTargetFile.contains("aura"))   {
+            pathToTargetFile = pathToTargetFile.substring(0, pathToTargetFile.lastIndexOf("/"));
+        }         
+        
         return pathToTargetFile;
     }
 
@@ -216,10 +221,9 @@ public class FileMover {
         }    	
     }
     
-    private void copyFile(File fileToCopy, File folderToCopy) throws IOException {
+    private void copyFile(File fileToCopy, File targetFolder) throws IOException {
     	String sourceFileName = fileToCopy.getPath();
-    	String targetFileName = folderToCopy.getPath() + "/" + fileToCopy.getName();
-
+    	String targetFileName = targetFolder.getPath() + "/" + fileToCopy.getName();
         copyFile(sourceFileName, targetFileName);
     }
     
