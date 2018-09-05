@@ -1,17 +1,28 @@
 package com.diana.parser;
 
+// JSON
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONObject;
+
+// XML
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import org.xml.sax.SAXException;
-import org.json.simple.JSONObject;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+
+//IO
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.IOException;
+
+// Collections
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -76,7 +87,6 @@ public class PackageXMLParser implements XMLParser {
     }
 
     private void loadFolderMapFromJSON() throws Exception {
-
         File jsonFile = new File(PackageXMLParser.PATH_TO_CONFIG_JSON);
         String jsonSTR = "";
 
