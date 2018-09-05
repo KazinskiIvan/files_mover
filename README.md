@@ -1,8 +1,5 @@
 # files_mover
 
-*Bugs*
-* Aura components are not copied: *bug* to be fixed.
-
 *Important Limitations*
 * Translations must be excluded from package and validated/deployed separately: *task* 
 * "-l" option is required, but no more needed: *task*
