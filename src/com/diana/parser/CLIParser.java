@@ -8,19 +8,15 @@ public class CLIParser {
         Options options = new Options();
         Option option;
         
-        option = new Option("p", "package", true, "input path to package.xml");
+        option = new Option("s", "source", true, "full path to source (e.g. git) folder with metadata files");
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("s", "source", true, "input path to source folder with files");
+        option = new Option("t", "target", true, "full path to target folder you want to copy files into");
         option.setRequired(true);
         options.addOption(option);
 
-        option = new Option("t", "target", true, "input path to target folder to copy files");
-        option.setRequired(true);
-        options.addOption(option);
-        
-        option = new Option("l", "labels", true, "input path to labels\\CustomLabels.labels file");
+        option = new Option("p", "package", true, "full path to package.xml");
         option.setRequired(true);
         options.addOption(option);
 

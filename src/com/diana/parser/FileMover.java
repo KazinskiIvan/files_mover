@@ -23,10 +23,12 @@ public class FileMover {
     private File customLabelsFile;
     private ArrayList<String> filesPath;
 
-    public FileMover(String sourceFolderPath, String targetFolderPath, String customLabelsFilePath, XMLParser parser) throws Exception {
+    public FileMover(String sourceFolderPath, String targetFolderPath, XMLParser parser) throws Exception {
         this.sourceFolder = new File(sourceFolderPath);
         this.targetFolder = new File(targetFolderPath);
-        this.customLabelsFile = new File(customLabelsFilePath);
+        this.customLabelsFile = new File(this.sourceFolder.getPath()+ "\\labels\\CustomLabels.labels");
+
+
         if (!this.sourceFolder.exists()) {
             throw new Exception(String.format("Folder %s doesn't exist.", this.sourceFolder.getAbsolutePath()));
         }

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 interface XMLParser {
-
     ArrayList<String> getFoldersMapping() throws SAXException, IOException, ParserConfigurationException;
     File getXMLFIle();
 }

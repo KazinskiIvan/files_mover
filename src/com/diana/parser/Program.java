@@ -21,7 +21,6 @@ public class Program {
         String sourceFolderPath = cmd.getOptionValue("source");
         String targetFolderPath = cmd.getOptionValue("target");
         String packageXMLPath = cmd.getOptionValue("package");
-        String customLabelsFile = cmd.getOptionValue("labels");
 
         try {
         	System.out.println("\n" +
@@ -29,7 +28,7 @@ public class Program {
     			 "1. '*' is not supported yet. Please explicitly list all necessary files in package.xml" + "\n" +
     			 "2. Be aware of adding 'Translations' to package.xml. They are not correct in GIT now. Please deploy translations separately."	
 			);
-	        FileMover mover = new FileMover(sourceFolderPath, targetFolderPath, customLabelsFile, new PackageXMLParser(packageXMLPath));
+	        FileMover mover = new FileMover(sourceFolderPath, targetFolderPath, new PackageXMLParser(packageXMLPath));
 	        mover.invoke();
         } catch (Exception e) {
         	System.out.println(e.getMessage());
