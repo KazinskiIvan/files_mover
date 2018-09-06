@@ -52,8 +52,6 @@ public class FileMover {
         copyCustomLablesFile();
 
         for (File sourceFile : this.sourceFolder.listFiles()) {
-            //System.out.println(">>> " + fileFrom.toPath());
-            //System.out.println(">>> " + sourceFile.toPath());
             if (!sourceFile.isDirectory()) {
                 continue;
             }
