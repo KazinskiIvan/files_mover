@@ -1,5 +1,7 @@
 package com.diana.parser;
 
+import java.io.File;
+
 import org.apache.commons.cli.*;
 
 public class Program {
@@ -21,6 +23,9 @@ public class Program {
         String sourceFolderPath = cmd.getOptionValue("source");
         String targetFolderPath = cmd.getOptionValue("target");
         String packageXMLPath = cmd.getOptionValue("package");
+        if (packageXMLPath == null) {
+        	packageXMLPath = new File(sourceFolderPath).getPath() + "\\" + "package.xml";
+        }
 
         try {
         	System.out.println("\n" +

@@ -17,7 +17,7 @@ public class CLIParser {
         options.addOption(option);
 
         option = new Option("p", "package", true, "full path to package.xml");
-        option.setRequired(true);
+        option.setRequired(false);
         options.addOption(option);
 
         return options;
