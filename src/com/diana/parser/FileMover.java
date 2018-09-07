@@ -211,8 +211,9 @@ public class FileMover {
         ) {
             boolean eof = false;
             while (!eof){
-                byte currentByte = (byte) bufferedInputStream.read();
-                if( currentByte != -1) {
+                int intToByte = bufferedInputStream.read();
+                if (intToByte != -1) {
+                    byte currentByte = (byte) intToByte;
                     bufferedOutputStream.write(currentByte);
                 } else {
                     eof = true;
