@@ -22,6 +22,7 @@ public class FileMover {
     private XMLParser parser;
     private File customLabelsFile;
     private ArrayList<String> filesPath;
+    private ArrayList<String> labels;
 
     public FileMover(String sourceFolderPath, String targetFolderPath, XMLParser parser) throws Exception {
         this.sourceFolder = new File(sourceFolderPath);
@@ -48,6 +49,8 @@ public class FileMover {
         System.out.println("\nStarted copying ...");
         cleanFolder(this.targetFolder);
 
+        copyCustomLablesFile();
+
         for (File sourceFile : this.sourceFolder.listFiles()) {
             if (!sourceFile.isDirectory()) {
                 continue;
@@ -56,14 +59,13 @@ public class FileMover {
         }
 
         copyFile(parser.getXMLFIle(), this.targetFolder );
-        copyCustomLablesFile();
 
         System.out.println("Completed copying ...\n");
     }
-    
-    private void copyCustomLablesFile(){
-    	try {
-            ArrayList<String> labels = new ArrayList<String>();
+
+    private void copyCustomLablesFile() {
+        try {
+            labels = new ArrayList<String>();
             for (String filePath : this.filesPath) {
                 if (filePath.startsWith("CustomLabel/")) {
                     labels.add(filePath.split("/")[1]);
@@ -78,7 +80,7 @@ public class FileMover {
             if (!labelsFolder.exists()){
                 createFolder(labelsFolderPath);
             }
-	        
+
             //--- start copy labels ---
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -111,11 +113,11 @@ public class FileMover {
             //--- end copy labels ---
 
             //copyFile(this.customLabelsFile, labelsFolder);
-    	} catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-    	}
+        }
     }
-    
+
     private static String getValue(String tag, Element element, int elementIndex) {
         NodeList nodes = element.getElementsByTagName(tag).item(elementIndex).getChildNodes();
         Node node = (Node) nodes.item(0);
@@ -125,7 +127,7 @@ public class FileMover {
     private static String getValue(String tag, Element element) {
         return getValue(tag, element, 0);
     }
-    
+
     private static boolean checkLabel(ArrayList<String> labels, String labelToCheck) {
         boolean result = false;
         for (String label : labels) {
@@ -178,8 +180,8 @@ public class FileMover {
         // QuickFixForAura
         if (pathToTargetFile.contains("aura"))   {
             pathToTargetFile = pathToTargetFile.substring(0, pathToTargetFile.lastIndexOf("/"));
-        }         
-        
+        }
+
         return pathToTargetFile;
     }
 
@@ -199,40 +201,85 @@ public class FileMover {
             }
         }
     }
-    
+
     private void copyFile(String sourceFileName, String targetFileName) throws IOException {
         try (
-			InputStream inputStream = new FileInputStream(sourceFileName);
-			OutputStream outputStream = new FileOutputStream(targetFileName);
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream)
-		) {
-        	boolean eof = false;
-        	while (!eof){
-        		byte currentByte = (byte) bufferedInputStream.read();
-        		if( currentByte != -1) {
-        			bufferedOutputStream.write(currentByte);
-        		} else {
-        			eof = true;
-        		}
-        	}        	
+                InputStream inputStream = new FileInputStream(sourceFileName);
+                OutputStream outputStream = new FileOutputStream(targetFileName);
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream)
+        ) {
+            boolean eof = false;
+            while (!eof){
+                byte currentByte = (byte) bufferedInputStream.read();
+                if( currentByte != -1) {
+                    bufferedOutputStream.write(currentByte);
+                } else {
+                    eof = true;
+                }
+            }
         } catch (IOException ex) {
             throw new IOException(String.format("Failed to copy %s to %s.", sourceFileName, targetFileName));
         } catch (Exception e) {
-        	System.out.println(e.getMessage());
-        }    	
+            System.out.println(e.getMessage());
+        }
     }
-    
-    private void copyFile(File fileToCopy, File targetFolder) throws IOException {
-    	String sourceFileName = fileToCopy.getPath();
-    	String targetFileName = targetFolder.getPath() + "/" + fileToCopy.getName();
-        copyFile(sourceFileName, targetFileName);
-    }
-    
-    private void copyFile(String fileName) throws IOException {
-        String sourceFileName = this.sourceFolder.getAbsolutePath() + "/" + fileName;
-        String targetFileName = this.targetFolder.getAbsolutePath() + "/" + fileName;
 
+    private void copyFile(File fileToCopy, File targetFolder) throws IOException {
+        String sourceFileName = fileToCopy.getPath();
+        String targetFileName = targetFolder.getPath() + "/" + fileToCopy.getName();
         copyFile(sourceFileName, targetFileName);
-    }    
+    }
+
+    private void copyTranslationsFile(String fileName){
+        try{
+            String translationsSourceFilePath = this.sourceFolder.getPath()+ "\\" + fileName;
+            String translationsTargetFilePath = this.targetFolder.getPath()+ "\\" + fileName;
+            File translationsFile = new File(translationsSourceFilePath);
+
+            //--- start copy translations ---
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document docTranslations = dBuilder.parse(translationsFile);
+            docTranslations.getDocumentElement().normalize();
+
+            NodeList translationsList = docTranslations.getElementsByTagName("customLabels");
+            int countOfTranslations = translationsList.getLength();
+
+            Document newDocLabels = dBuilder.newDocument();
+            Node rootElement = newDocLabels.importNode((Element)docTranslations.getElementsByTagName("Translations").item(0), false);
+            newDocLabels.appendChild(rootElement);
+
+            for (int i = 0; i < countOfTranslations; i++) {
+                Node translation = translationsList.item(i);
+                if (translation.getNodeType() == Node.ELEMENT_NODE) {
+                    boolean isLabelFromTheList = checkLabel(labels, getValue("name", (Element)translation));
+                    if (isLabelFromTheList) {
+                        rootElement.appendChild(newDocLabels.importNode((Element)translation, true));
+                    }
+                }
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource sourceDoc = new DOMSource(newDocLabels);
+            StreamResult resultDoc = new StreamResult(new File(translationsTargetFilePath));
+            transformer.transform(sourceDoc, resultDoc);
+            //--- end copy translations ---
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getStackTrace());
+        }
+    }
+
+    private void copyFile(String fileName) throws IOException {
+        if (fileName.startsWith("translations/") && labels != null && labels.size() > 0) {
+            copyTranslationsFile(fileName);
+        } else {
+            String sourceFileName = this.sourceFolder.getAbsolutePath() + "/" + fileName;
+            String targetFileName = this.targetFolder.getAbsolutePath() + "/" + fileName;
+
+            copyFile(sourceFileName, targetFileName);
+        }
+    }
 }
