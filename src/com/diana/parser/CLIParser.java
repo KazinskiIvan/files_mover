@@ -15,11 +15,11 @@ public class CLIParser {
         option = new Option("t", "target", true, "full path to target folder you want to copy files into");
         option.setRequired(true);
         options.addOption(option);
-
+        
         option = new Option("p", "package", true, "full path to package.xml");
         option.setRequired(false);
-        options.addOption(option);
-
+        options.addOption(option);        
+        
         return options;
     }
 }

@@ -31,9 +31,12 @@ public class PackageXMLParser implements XMLParser {
     private File configFile;
     private final static String PATH_TO_CONFIG_JSON = "mapping.json";
     private HashMap<String, String> foldersMap;
+    private HashMap<String, MetadataType> metaDataTypes;
+    
 
     public PackageXMLParser(String pathToConfigFile) throws Exception {
         this.foldersMap = new HashMap<>();
+        this.metaDataTypes = new HashMap<>();
         this.configFile = new File(pathToConfigFile);
         if (!this.configFile.exists()) {
             throw new Exception(String.format("File %s doesn't exist.", this.configFile.getAbsolutePath()));
@@ -78,9 +81,20 @@ public class PackageXMLParser implements XMLParser {
         }
         return filesList;
     }
+    
+    public void xxx (){
+    	
+    }
+    
+    /**
+     * for "ApexClass" returns "classes"
+     * @param componentName
+     * @return
+     */
 
     private String getFolderName(String componentName) {
         if (this.foldersMap.containsKey(componentName)) {
+        	System.out.println(componentName + " " + this.foldersMap.get(componentName));
             return this.foldersMap.get(componentName);
         }
         return componentName;
@@ -135,6 +149,10 @@ public class PackageXMLParser implements XMLParser {
             String component = (String) sfMap.get("component");
             if (folder.trim() != "") {
                 this.foldersMap.put(component, folder);
+                MetadataType metadataType = new MetadataType();
+                metadataType.sXMLName = component;
+                metadataType.sDirName = folder;
+                this.metaDataTypes.put(component, metadataType);
             }
         }
     }
