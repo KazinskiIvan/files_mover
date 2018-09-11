@@ -28,11 +28,6 @@ public class Program {
         }
 
         try {
-        	System.out.println("\n" +
-    			"Notes:" + "\n" +
-    			 "1. '*' is not supported yet. Please explicitly list all necessary files in package.xml" + "\n" +
-    			 "2. Be aware of adding 'Translations' to package.xml. They are not correct in GIT now. Please deploy translations separately."	
-			);
 	        FileMover mover = new FileMover(sourceFolderPath, targetFolderPath, new PackageXMLParser(packageXMLPath));
 	        mover.invoke();
         } catch (Exception e) {
